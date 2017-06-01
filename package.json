@@ -1,0 +1,19 @@
+{
+  "name": "data-studio",
+  "version": "1.0.0",
+  "description": "Gateway for Data Studio",
+  "main": "data-studio.js",
+  "scripts": {
+    "test": "./node_modules/gulp/bin/gulp.js unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/data-studio/gateway.git"
+  },
+  "author": "Callan Peter Milne <callan.milne@eviratec.com.au>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/data-studio/gateway/issues"
+  },
+  "homepage": "https://github.com/data-studio/gateway#readme"
+}
