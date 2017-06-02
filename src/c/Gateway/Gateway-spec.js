@@ -1,6 +1,7 @@
 "use strict";
 
 const Gateway = require("./Gateway");
+const ServiceType = require("../Service/Type/ServiceType");
 
 describe(`Gateway`, function () {
 
@@ -12,12 +13,20 @@ describe(`Gateway`, function () {
 
   describe(`gateway.serviceType("auth") @return value`, function () {
 
-    it(`should be an instance of ServiceType`, function () {
-      expect(gateway.serviceType())
+    let result;
+
+    beforeEach(function () {
+      result = gateway.serviceType("auth");
     });
 
-    it(`should have a property ID with the value "auth"`, function () {
-      expect(gateway.serviceType().id).toEqual("auth");
+    it(`should be an instance of ServiceType`, function () {
+      expect(result)
+        .toEqual(jasmine.any(ServiceType));
+    });
+
+    it(`should have a property "id" with the value "auth"`, function () {
+      expect(result.id)
+        .toEqual("auth");
     });
 
   });
