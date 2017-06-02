@@ -1,4 +1,9 @@
 title: Test Gateway
+serviceTypes:
+- id: auth
+  enabled: true
+- id: entity
+  enabled: true
 handle:
   services:
     via:
