@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const ARGV = process.argv.slice(0);
+const NODE_PATH = ARGV.shift();
+const BIN_PATH = ARGV.shift();
+
+const fs = require("fs");
+const path = require("path");
+
+const PKG_PATH = path.resolve(BIN_PATH.replace(/ds\-gateway$/, ""), "../");
+const PKG_JSON_PATH = path.resolve(PKG_PATH, "./package.json");
+const PKG = require(PKG_JSON_PATH);
+
+const gatewayConfig = require('../src/s/gatewayConfig')(PKG, ARGV, process);
+
+const gatewayID = require('../src/s/gatewayID')(gatewayConfig);
+
+const ServiceRegistry = require('../src/c/ServiceRegistry')(GatewayID);
+const AppRegistry = require('../src/c/AppRegistry')(GatewayID);
+
+const RestServiceInterface = require('../src/c/RestServiceInterface')(ServiceRegistry);
+const RestAppInterface = require('../src/c/RestAppInterface')(AppRegistry);
+
+const gateway = requireSingleton('gateway')([
+  ServiceRegistry,
+  AppRegistry,
+  RestServiceInterface,
+  RestAppInterface,
+]);
+
+gateway.openInterfaces();
+
+process.stdout.write("-- Path to node: " + NODE_PATH + "\n");
+process.stdout.write("-- Path to ds-gateway: " + BIN_PATH + "\n");
+process.stdout.write("-- Argv: " + JSON.stringify(ARGV) + "\n");
+process.stdout.write("-- CWD: " + process.cwd() + "\n");
+
+process.stdout.write("-- PKG JSON: " + PKG_JSON_PATH + "\n");
+process.stdout.write("-- PKG Version: " + PKG.version + "\n");
+
+function requireSingleton (name) {
+  return require(`../src/s/${name}`);
+}
