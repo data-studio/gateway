@@ -35,6 +35,10 @@ module.exports = (function GatewayProvider () {
 
     }
 
+    registryFor () {
+
+    }
+
     openIfaces () {
       let ifaces = this.ifaces;
       ifaces.forEach(iface => {
