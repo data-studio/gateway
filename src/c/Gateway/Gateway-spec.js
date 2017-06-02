@@ -31,22 +31,22 @@ describe(`Gateway`, function () {
 
   });
 
-  describe(`gateway.verify(signedObject, senderKey) @return value`, function () {
+  describe(`gateway.verify(signedMessage, senderKey) @return value`, function () {
 
     let returnValue;
     let senderKey;
-    let signedObject;
+    let signedMessage;
 
     beforeEach(function () {
 
-      signedObject = {
+      signedMessage = {
         "message": `{\n  "Foo": "Bars",\n  "Baz'ss": "Quux"\n}\n`,
         "signature": "06725481712ea419877ce7251daf3cff4155b6e6ef567ef8406719df1cd71f8c"
       };
 
       senderKey = "daba5c4dad742f60f10597991fdfe1310a7c1fe0ac09324cb4a976962ec439e8";
 
-      returnValue = gateway.verify(signedObject, senderKey);
+      returnValue = gateway.verify(signedMessage, senderKey);
 
     });
 

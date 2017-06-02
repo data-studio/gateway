@@ -34,8 +34,16 @@ describe(`ServiceNodeID`, function () {
   describe(`serviceNodeID.key`, function () {
 
     it(`should be null`, function () {
-      let uuidExpr = /^[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}$/;
       expect(serviceNodeID.key)
+        .toBe(null);
+    });
+
+  });
+
+  describe(`serviceNodeID.host`, function () {
+
+    it(`should be null`, function () {
+      expect(serviceNodeID.host)
         .toBe(null);
     });
 
