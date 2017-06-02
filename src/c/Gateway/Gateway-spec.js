@@ -40,7 +40,7 @@ describe(`Gateway`, function () {
     beforeEach(function () {
 
       signedObject = {
-        "message": `{\n  "Foo": "Bars",\n  "Baz'ss": "Quux",\n}`,
+        "message": `{\n  "Foo": "Bars",\n  "Baz'ss": "Quux"\n}\n`,
         "signature": "06725481712ea419877ce7251daf3cff4155b6e6ef567ef8406719df1cd71f8c"
       };
 
