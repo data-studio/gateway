@@ -34,13 +34,13 @@ describe(`Gateway`, function () {
   describe(`gateway.verify(signedObject, senderKey) @return value`, function () {
 
     let returnValue;
+    let senderKey;
     let signedObject;
 
     beforeEach(function () {
 
       signedObject = {
-        "Foo": "Bars",
-        "Baz'ss": "Quux",
+        "message": `{\n  "Foo": "Bars",\n  "Baz'ss": "Quux",\n}`,
         "signature": "06725481712ea419877ce7251daf3cff4155b6e6ef567ef8406719df1cd71f8c"
       };
 
