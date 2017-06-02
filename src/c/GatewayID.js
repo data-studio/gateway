@@ -3,7 +3,7 @@
 const uuid = require('uuid');
 const EventEmitter = require('events');
 
-module.exports = class GatewayID () {
+module.exports = class GatewayID {
 
   constructor (gatewayConfig) {
 

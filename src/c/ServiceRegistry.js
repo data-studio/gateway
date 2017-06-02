@@ -2,14 +2,10 @@
 
 const GatewayRegistry = require('./GatewayRegistry');
 
-module.exports = function ServiceRegistryProvider (GatewayID) {
+module.exports = class ServiceRegistry extends GatewayRegistry {
 
-  return class ServiceRegistry extends GatewayRegistry () {
-
-    constructor () {
-      super(...arguments);
-    }
-
-  };
+  constructor () {
+    super(...arguments);
+  }
 
 };

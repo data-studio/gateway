@@ -1,27 +1,28 @@
 #!/usr/bin/env node
 
-const ARGV = process.argv.slice(0);
-const NODE_PATH = ARGV.shift();
-const BIN_PATH = ARGV.shift();
-
 const fs = require("fs");
 const path = require("path");
 
-const PKG_PATH = path.resolve(BIN_PATH.replace(/ds\-gateway$/, ""), "../");
+const ARGV = process.argv.slice(0);
+const NODE_PATH = ARGV.shift();
+const BIN_PATH = ARGV.shift();
+const PKG_PATH = path.resolve(__dirname, "../");
+
+// const PKG_PATH = path.resolve(BIN_PATH.replace(/ds\-gateway$/, ""), "../");
 const PKG_JSON_PATH = path.resolve(PKG_PATH, "./package.json");
 const PKG = require(PKG_JSON_PATH);
 
-const gatewayConfig = require('../src/s/gatewayConfig')(PKG, ARGV, process);
+const gatewayConfig = rSingleton('gatewayConfig')(PKG, ARGV, process);
 
-const gatewayID = require('../src/s/gatewayID')(gatewayConfig);
+const gatewayID = rSingleton('gatewayID')(gatewayConfig);
 
-const ServiceRegistry = require('../src/c/ServiceRegistry')(GatewayID);
-const AppRegistry = require('../src/c/AppRegistry')(GatewayID);
+const ServiceRegistry = rConstructor('ServiceRegistry');
+const AppRegistry = rConstructor('AppRegistry');
 
-const RestServiceInterface = require('../src/c/RestServiceInterface')(ServiceRegistry);
-const RestAppInterface = require('../src/c/RestAppInterface')(AppRegistry);
+const RestServiceInterface = rConstructor('RestServiceInterface');
+const RestAppInterface = rConstructor('RestAppInterface');
 
-const gateway = requireSingleton('gateway')([
+const gateway = rSingleton('gateway')([
   ServiceRegistry,
   AppRegistry,
   RestServiceInterface,
@@ -38,6 +39,10 @@ process.stdout.write("-- CWD: " + process.cwd() + "\n");
 process.stdout.write("-- PKG JSON: " + PKG_JSON_PATH + "\n");
 process.stdout.write("-- PKG Version: " + PKG.version + "\n");
 
-function requireSingleton (name) {
+function rSingleton (name) {
   return require(`../src/s/${name}`);
+}
+
+function rConstructor (name) {
+  return require(`../src/c/${name}`);
 }

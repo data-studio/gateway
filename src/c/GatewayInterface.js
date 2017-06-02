@@ -2,7 +2,7 @@
 
 const EventEmitter = require('events');
 
-module.exports = class GatewayInterface extends EventEmitter () {
+module.exports = class GatewayInterface extends EventEmitter {
 
   constructor () {
 
@@ -14,6 +14,10 @@ module.exports = class GatewayInterface extends EventEmitter () {
 
   static is (input) {
     return input instanceof GatewayInterface;
+  }
+
+  static get target () {
+
   }
 
 };

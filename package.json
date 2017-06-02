@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Gateway for Data Studio",
   "main": "data-studio.js",
+  "bin": {
+    "ds-gateway": "./bin/ds-gateway"
+  },
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js unit"
   },

@@ -1,0 +1,10 @@
+title: Test Gateway
+handle:
+  services:
+    via:
+    - host: 0.0.0.0
+      port: 8484
+  apps:
+    via:
+    - host: 0.0.0.0
+      port: 8484

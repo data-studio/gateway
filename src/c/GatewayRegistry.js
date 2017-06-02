@@ -2,7 +2,7 @@
 
 const EventEmitter = require('events');
 
-module.exports = class GatewayRegistry extends EventEmitter () {
+module.exports = class GatewayRegistry extends EventEmitter {
 
   constructor () {
     super();

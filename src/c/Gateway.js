@@ -10,7 +10,7 @@ module.exports = (function GatewayProvider () {
   const SERVICE_INTERFACE = GatewayInterface.SERVICE_INTERFACE;
   const APP_INTERFACE = GatewayInterface.APP_INTERFACE;
 
-  class Gateway extends EventEmitter () {
+  class Gateway extends EventEmitter {
 
     static get APPS () {
       return 'apps';
@@ -21,6 +21,8 @@ module.exports = (function GatewayProvider () {
     }
 
     constructor (components) {
+
+      super();
 
       components = components || [];
 
@@ -54,7 +56,7 @@ module.exports = (function GatewayProvider () {
     this.interfaces.forEach(fn);
   }
 
-  function prepareIfaces (gateway, ifaces) {
+  function prepareIfaces (gateway) {
     let ifaces = gateway.ifaces;
     ifaces.forEach(iface => {
       let registry = gateway.registryFor(iface.target);
@@ -73,6 +75,8 @@ module.exports = (function GatewayProvider () {
       let iface = component;
       return initIface(gateway, iface);
     }
+
+    console.log(component);
 
     throw new Error('Unrecognized component');
 
