@@ -13,20 +13,45 @@ describe(`Gateway`, function () {
 
   describe(`gateway.serviceType("auth") @return value`, function () {
 
-    let result;
+    let returnValue;
 
     beforeEach(function () {
-      result = gateway.serviceType("auth");
+      returnValue = gateway.serviceType("auth");
     });
 
     it(`should be an instance of ServiceType`, function () {
-      expect(result)
+      expect(returnValue)
         .toEqual(jasmine.any(ServiceType));
     });
 
     it(`should have a property "id" with the value "auth"`, function () {
-      expect(result.id)
+      expect(returnValue.id)
         .toEqual("auth");
+    });
+
+  });
+
+  describe(`gateway.verify(signedObject, senderKey) @return value`, function () {
+
+    let returnValue;
+    let signedObject;
+
+    beforeEach(function () {
+
+      signedObject = {
+        "Foo": "Bars",
+        "Baz'ss": "Quux",
+        "signature": "06725481712ea419877ce7251daf3cff4155b6e6ef567ef8406719df1cd71f8c"
+      };
+
+      senderKey = "daba5c4dad742f60f10597991fdfe1310a7c1fe0ac09324cb4a976962ec439e8";
+
+      returnValue = gateway.verify(signedObject, senderKey);
+
+    });
+
+    it("should be true if the hmac signature is correct", function () {
+      expect(returnValue).toBe(true);
     });
 
   });
